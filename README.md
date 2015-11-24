@@ -1,4 +1,4 @@
-# co-transcript
+# Co-transcript
 Plateforme de conversion collaborative de contenus scannés vers du texte (transcription).
 
 L'outil à été conçu dans l'optique de permettre à une communauté de participer à la transcription de texte manuscrit pour les rendre accessible numériquement, indexable et facilement lisible.
