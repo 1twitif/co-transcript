@@ -2,7 +2,9 @@
 
 require_once(dirname(__FILE__) . '/../src/document.php');
 
-class MockReservation {}
+class MockReservationStillActive {function isExpired (){return false;}}
+class MockReservationExpired {function isExpired (){return true;}}
+
 class TestDocument extends UnitTestCase {
     function testCanCreateDocument() {
     	$doc = new Document;
@@ -24,8 +26,26 @@ class TestDocument extends UnitTestCase {
 
     function testIsReserved() {
 		$doc = new Document;
-    	$doc->addReservation(new MockReservation);
-    	$this->assertEqual($doc->isReserved(), true);
+    	$doc->addReservation(new MockReservationStillActive);
+    	$this->assertTrue($doc->isReserved());
+    }
+
+    function testNoReservation() {
+    	$doc = new Document;
+    	$this->assertFalse($doc->isReserved());
+    }
+
+    function testExpiredReservation() {
+    	$doc = new Document;
+    	$doc->addReservation(new MockReservationExpired);
+    	$this->assertFalse($doc->isReserved());
+    }
+
+    function testMultipleReservations() {
+    	$doc = new Document;
+    	$doc->addReservation(new MockReservationStillActive);
+    	$doc->addReservation(new MockReservationExpired);
+    	$this->assertTrue($doc->isReserved());
     }
 }
 

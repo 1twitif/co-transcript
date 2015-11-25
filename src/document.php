@@ -2,6 +2,8 @@
 
 class Document {
 	var $files = [];
+	var $reservations = [];
+
 	function addFile ($fileString) {
 			$this->files[] = $fileString;
 	}
@@ -14,11 +16,14 @@ class Document {
 		return $this->files[sizeof($this->files)-1];
 	}
 
-	function addReservation ($Reservation) {
-
+	function addReservation ($reservation) {
+		$this->reservations[] = $reservation;
 	}
 
 	function isReserved () {
-		 #return True;
+		 for ($a = 0; $a < sizeof($this->reservations); $a++)
+		 	if (!$this->reservations[$a]->isExpired())
+		 		return True;
+		 return False;
 	}
 }

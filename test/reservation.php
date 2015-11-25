@@ -9,18 +9,18 @@ class TestReservation extends UnitTestCase {
     	$this->assertIsA($res, 'Reservation');
     }
 
-    function testAddFileToDocument() {
-    	$doc = new Document;
-    	$doc->addFile('monscan.jpg');
-    	$this->assertEqual($doc->getScan(), 'monscan.jpg');
+    function testIsExpired(){
+        $doc = $user = 0;
+        $date = time() - (7 * 24 * 60 * 60);
+        $duration = 15 * 24 * 60 * 60;
+        $res = new Reservation($doc, $user, $date, $duration);
+        $this->assertFalse($res->isExpired());
     }
 
-    function testGetLastVersion() {
-    	$doc = new Document;
-    	$doc->addFile('monscan.jpg');
-    	$doc->addFile('monFichier.jpg');
-    	$this->assertEqual($doc->getLastVersion(), 'monFichier.jpg');
+    function testIsNotExpired(){
+        $doc = $user = $date = $duration = 0;
+        $res = new Reservation($doc, $user, $date, $duration);
+        $this->assertTrue($res->isExpired());
     }
-
 }
 
