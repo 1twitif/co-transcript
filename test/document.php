@@ -14,14 +14,14 @@ class TestDocument extends UnitTestCase {
     function testAddFileToDocument() {
     	$doc = new Document;
     	$doc->addFile('monscan.jpg');
-    	$this->assertEqual($doc->getScan(), 'monscan.jpg');
+    	$this->assertIdentical($doc->getScan(), 'monscan.jpg');
     }
 
     function testGetLastVersion() {
     	$doc = new Document;
     	$doc->addFile('monscan.jpg');
     	$doc->addFile('monFichier.jpg');
-    	$this->assertEqual($doc->getLastVersion(), 'monFichier.jpg');
+    	$this->assertIdentical($doc->getLastVersion(), 'monFichier.jpg');
     }
 
     function testIsReserved() {
@@ -46,6 +46,25 @@ class TestDocument extends UnitTestCase {
     	$doc->addReservation(new MockReservationStillActive);
     	$doc->addReservation(new MockReservationExpired);
     	$this->assertTrue($doc->isReserved());
+    }
+    
+    function testGetFinished() {
+    	$doc = new Document;
+    	$this->assertFalse($doc->isFinished());
+    }
+
+    function testSetFinished() {
+    	$doc = new Document;
+    	$doc->setFinished();
+    	$this->assertTrue($doc->isFinished());
+    }
+
+    function testCountVersions() {
+    	$doc = new Document;
+    	$doc->addFile('scan.jpg');
+    	$doc->addFile('transcriptionBrute.txt');
+    	$doc->addFile('transcriptionMiseEnPage.md');
+    	$this->assertIdentical($doc->countVersions(), 3);
     }
 }
 

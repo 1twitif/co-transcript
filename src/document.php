@@ -3,9 +3,10 @@
 class Document {
 	var $files = [];
 	var $reservations = [];
+	var $finished = False;
 
 	function addFile ($fileString) {
-			$this->files[] = $fileString;
+		$this->files[] = $fileString;
 	}
 
 	function getScan () {
@@ -25,5 +26,17 @@ class Document {
 		 	if (!$this->reservations[$a]->isExpired())
 		 		return True;
 		 return False;
+	}
+
+	function isFinished() {
+		return $this->finished;
+	}
+
+	function setFinished() {
+		$this->finished = True;
+	}
+
+	function countVersions() {
+		return sizeof($this->files);
 	}
 }

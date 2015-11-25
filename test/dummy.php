@@ -2,7 +2,7 @@
 
 class TestDummy extends UnitTestCase {
     function testAlwaysTrue() {
-    	$this->assertEqual(1,1);
+    	$this->assertIdentical(1,1);
     }
 }
 
