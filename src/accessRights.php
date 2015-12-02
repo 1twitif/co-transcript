@@ -3,28 +3,39 @@
 class AccessRights {
 	
 	var $decoratedObject;
-	var $loggedRank;
+	var $loggedRank = [];
+	var $authorizedFunctions = [];
 
-	function __construct ($decoratedObject) {
+	function __construct($decoratedObject) {
 		$this->decoratedObject = $decoratedObject;
 	}
 
-	function allow($rank, $functionName) {
-		
+	function allow($rank, $methodName) {
+		if (!isset($this->authorizedFunctions[$methodName]))
+			$this->authorizedFunctions[$methodName] = [];
+		$this->authorizedFunctions[$methodName][$rank] = $rank;
 	}
 
 	function loggedAsA($rank) {
-		$this->loggedRank = $rank;
+		$this->loggedRank[] = $rank;
 	}
 
-	function __call($method_name, $args) {
+	function __call($methodName, $args) {
 
-		if (!method_exists($this->decoratedObject, $method_name))
-			throw new Exception("UndefinedFunction: $method_name",404);
+		if (!method_exists($this->decoratedObject, $methodName))
+			throw new Exception("UndefinedFunction: $methodName",404);
 
-		if ($this->loggedRank != "User")
-			throw new Exception("UnauthorizedAccess: $method_name as $this->loggedRank",403);
+		for ($i=0; $i < sizeof($this->loggedRank); $i++) { 
+			
+			if (isset($this->authorizedFunctions[$methodName]) 
+				&& isset($this->authorizedFunctions[$methodName][$this->loggedRank[$i]]))
+		    	return call_user_func_array(
+		    		array(
+		    			$this->decoratedObject, 
+		    			$methodName), 
+		    		$args);
+		}
 
-    	return call_user_func_array(array($this->decoratedObject, $method_name), $args);
+		throw new Exception('UnauthorizedAccess: '.$methodName.' as '.json_encode($this->loggedRank),403);
     }
 }
