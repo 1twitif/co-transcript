@@ -4,6 +4,8 @@ class Document {
 	var $files = [];
 	var $reservations = [];
 	var $finished = False;
+	var $title = 0;
+	var $originalTitle = 0;
 
 	function addFile ($fileString) {
 		$this->files[] = $fileString;
@@ -38,5 +40,19 @@ class Document {
 
 	function countVersions() {
 		return sizeof($this->files);
+	}
+
+	function getTitle() {
+		return $this->title;
+	}
+
+	function addTitle($title) {
+		if ($this->originalTitle === 0)
+			$this->originalTitle = $title;
+		$this->title = $title;
+	}
+
+	function getOriginalTitle(){
+		return $this->originalTitle;
 	}
 }

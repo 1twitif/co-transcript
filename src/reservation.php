@@ -2,6 +2,7 @@
 
 class Reservation {
 	var $doc, $author, $date, $duration, $finished;
+	
 	function Reservation ($doc, $author, $date, $duration) {
 		$this->doc = $doc;
 		$this->author = $author;

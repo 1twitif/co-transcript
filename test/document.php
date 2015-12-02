@@ -66,5 +66,19 @@ class TestDocument extends UnitTestCase {
     	$doc->addFile('transcriptionMiseEnPage.md');
     	$this->assertIdentical($doc->countVersions(), 3);
     }
+
+    function testGetTitle() {
+    	$doc = new Document;
+    	$doc->addTitle('nom random');
+    	$doc->addTitle('nom corrigé');
+    	$this->assertIdentical($doc->getTitle(), 'nom corrigé');
+    }
+
+    function testGetOriginalTitle() {
+    	$doc = new Document;
+    	$doc->addTitle('nom random');
+    	$doc->addTitle('nom corrigé');
+    	$this->assertIdentical($doc->getOriginalTitle(), 'nom random');
+    }
 }
 
