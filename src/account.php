@@ -5,12 +5,15 @@ class Account {
 	var $ranks = [];
 	var $username;
 	var $email;
-	var $password;
+	var $db;
 
-	function __construct() {
-		$nbArguments = func_num_args();
-    	$args = func_get_args();
-    	var_dump($args);
+	function __construct($dbConnector) {
+		$this->db = $dbConnector;
+	}
+	
+	function create($email, $username, $password) {
+    	$this->email = $email;
+    	$this->username = $username;
 	}
 
 	function getRanks() {
@@ -27,5 +30,14 @@ class Account {
 
 	function getUsername(){
 		return $this->username;
+	}
+
+	function loginByUsername($username, $password){
+		$this->username = $username;
+		$fields = ['username', 'password', 'email', 'ranks'];
+		$filters = ['username'=>$username];
+		$data = $this->db->get('users', $fields, $filters);
+		$pieces = explode(',', $data['ranks']);
+		$this->ranks = $pieces;
 	}
 }
