@@ -80,5 +80,14 @@ class TestDocument extends UnitTestCase {
     	$doc->addTitle('nom corrigé');
     	$this->assertIdentical($doc->getOriginalTitle(), 'nom random');
     }
+
+    function testSerialization(){
+        $doc = new Document;
+        $doc->addReservation(new MockReservationStillActive);
+        $doc->addReservation(new MockReservationExpired);
+        $serialized = serialize($doc);
+        $restoredDoc = unserialize($serialized);
+        $this->assertTrue($restoredDoc->isReserved());
+    }
 }
 

@@ -33,11 +33,33 @@ class Account {
 	}
 
 	function loginByUsername($username, $password){
-		$this->username = $username;
+		return $this->loginCustom('username', $username, $password);
+	}
+
+	function loginByEmail($email, $password){
+		return $this->loginCustom('email', $email, $password);
+	}
+
+	function loginCustom($type, $id, $password){
 		$fields = ['username', 'password', 'email', 'ranks'];
-		$filters = ['username'=>$username];
+		$filters = [$type=>$id];
 		$data = $this->db->get('users', $fields, $filters);
+		if (!$data) {
+    		throw new Exception ("UnknownAccount", 401);
+    	}
+    	if (!password_verify($password, $data['password'])) {
+    		throw new Exception ("WrongPassword", 401);
+    	}
 		$pieces = explode(',', $data['ranks']);
 		$this->ranks = $pieces;
+		$this->email = $data['email'];
+		$this->username = $data['username'];
+	}
+
+	function login($smartId, $password){
+		$emailPattern = '/^.+@.+\.[a-z]{2,}$/';
+		if (preg_match($emailPattern, $smartId))
+			return $this->loginByEmail($smartId, $password);
+		return $this->loginByUsername($smartId, $password);
 	}
 }
