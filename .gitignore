@@ -1,0 +1,4 @@
+Thumbs.db
+._*
+config.*.php
+!config.localhost.php
