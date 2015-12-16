@@ -22,6 +22,8 @@ html {
 }
 
 address {
+    margin-top: 150px;
+    margin-bottom: 20px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -56,23 +58,9 @@ a {
 	color: #000000;
 }
 
-a:hover {
-	text-decoration: underline;
-}
-
-/*.Photo {
-	position: absolute;
-	top: 60px;
-}*/
-
-#zonePrincipale {
-    display: flex;
-    justify-content: center;
-}
-
-#zonePrincipale section {
-    flex: 1 300px;
-    margin: 50px;
-    margin-left: 5%;
-    padding: 20px;
+footer {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    align-items: center;
+    border-bottom: 5px solid #000000;
 }
