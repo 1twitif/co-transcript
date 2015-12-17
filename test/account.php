@@ -17,7 +17,6 @@ class mockDBConnector {
 			];
 		}
 	}
-
 	function set($table, $fields){}
 }
 
