@@ -2,20 +2,44 @@
 
 require_once(dirname(__FILE__) . '/../src/account.php');
 
-class mockDBConnector {function get($table, $fields, $filters){
-	if (
-		(isset($filters['username'])
-			&& $filters['username'] == 'Luc')
-		|| (isset($filters['email'])
-			&& $filters['email'] =='a@b.cd')){
-		return [
-			'username'=> 'Luc',
-			'password'=>password_hash('1234', PASSWORD_DEFAULT),
-			'email'=> 'a@b.cd',
-			'ranks'=> 'User,Admin'
+class mockDBConnector {
+	function get($table, $fields, $filters){
+		if (
+			(isset($filters['username'])
+				&& $filters['username'] == 'Luc')
+			|| (isset($filters['email'])
+				&& $filters['email'] =='a@b.cd')){
+			return [
+				'username'=> 'Luc',
+				'password'=>password_hash('1234', PASSWORD_DEFAULT),
+				'email'=> 'a@b.cd',
+				'ranks'=> 'User,Admin'
 			];
+		}
 	}
-}}
+
+	function set($table, $fields){}
+}
+
+class mockDBConnectorStore{
+	var $persist = [];
+
+	function get($table, $fields, $filters){
+		foreach ($this->persist[$table] as $line) {
+			$match = true;
+			foreach ($filters as $key => $value)
+				if($line[$key]!=$value)
+					$match = false;
+			if($match) return $line;
+		}
+	}
+
+	function set($table, $fields){
+		if(!isset($this->persist[$table]))
+			$this->persist[$table] = [];
+		$this->persist[$table][] = $fields;
+	}
+}
 
 class testAccount extends UnitTestCase {
 
@@ -83,5 +107,25 @@ class testAccount extends UnitTestCase {
 		$auth = new Account(new mockDBConnector);
 		$auth->login('Luc', '1234');
 		$this->assertIdentical($auth->getRanks(), ['User','Admin']);
+	}
+
+	function testMultipleCreations() {
+		$db = new mockDBConnectorStore;
+		$auth = new Account($db);
+		$auth->create('a@b.cd', 'Luc', '1234');
+		$auth = new Account($db);
+		$auth->create('e@f.gh', 'Luke', '5678');
+		$auth = new Account($db);
+		$auth->login('Luc', '1234');
+		$this->assertIdentical($auth->getUsername(), 'Luc');
+	}
+
+	function testDefaultRanks() {
+		$db = new mockDBConnectorStore;
+		$auth = new Account($db);
+		$auth->create('a@b.cd', 'Luc', '1234');
+		$auth = new Account($db);
+		$auth->login('Luc', '1234');
+		$this->assertIdentical($auth->getRanks(), ['user']);
 	}
 }

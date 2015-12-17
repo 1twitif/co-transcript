@@ -12,8 +12,13 @@ class Account {
 	}
 	
 	function create($email, $username, $password) {
-    	$this->email = $email;
-    	$this->username = $username;
+    	$fields = [];
+    	$fields['username'] = $username;
+    	$fields['password'] = password_hash($password, PASSWORD_DEFAULT);
+    	$fields['email'] = $email;
+    	$fields['ranks'] = 'user';
+    	$this->db->set('users', $fields);
+    	$this->login($email, $password);
 	}
 
 	function getRanks() {
