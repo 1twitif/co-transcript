@@ -29,6 +29,6 @@
 
 <ul>
 	<li>
-		<a href="pages/register.php"><b>Inscription</b></a>
+		<a href="register"><b>Inscription</b></a>
 	</li>
 </ul>

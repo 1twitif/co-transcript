@@ -1,15 +1,5 @@
 <?php
 
-/*se connecter à la db
-créer une table si !table
-ajouter un champ de comptage si !
-lire le champ de comptage
-augmenter de 1 le résultat
-le restocker en base
-l'afficher*/
-
-
-
 try{
     $pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
