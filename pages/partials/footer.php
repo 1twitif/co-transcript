@@ -1,10 +1,10 @@
 <footer>
-    <address>
+    <nav>
         <a href="">A propos</a>
         <a href="">Qui sommes-nous?</a>
         <a href="mailto:millicent.billette@gmail.com">Contact</a>
 
-    </address>
+    </nav>
     <div id="licence" class="discret">
         <a href="http://www.gnu.org/licenses/agpl-3.0.fr.html" target="_blank">Licence AGPL</a>
     </div>

@@ -13,7 +13,7 @@ body {
 	margin: 40px;
 	padding: 40px;
 	background-color:  hsla(0, 0%, 80%, .8);
-	box-shadow: 0px 0px 50px 0px #000000;
+	box-shadow: 0 0 50px 0 #000000;
     padding-bottom: 10px;
 }
 
@@ -26,7 +26,7 @@ html {
     background-size: cover;
 }
 
-address {
+nav {
     margin-bottom: 20px;
     display: flex;
     flex-flow: row nowrap;
@@ -35,7 +35,7 @@ address {
 }
 
 h1 {
-    margin-top: 0px;
+    margin-top: 0;
     margin-left: 40%;
     margin-right: 40%;
     text-align: center;
@@ -53,30 +53,39 @@ h3 {
 	margin: 0 0 0 40px;
 }
 
+nav>*, [type="submit"]{
+    padding: 10px;
+    background-color: transparent;
+    font-weight: bold;
+}
+[type="submit"]{
+    border: dotted 1px hsla(0, 0%, 40%, .9);
+}
 
-
-html a {
+a, nav>*, [type="submit"] {
 	color: #000000;
     text-decoration: none;
     border-bottom: dotted 1px hsla(0, 0%, 40%, .9);
     position: relative;
     display: inline-block;
+    cursor:pointer;
 }
-a::before {
+a::before, nav>*::before, [type="submit"]::before {
     content: "";
     width: 100%;
-    height: 0%;
+    height: 0;
     bottom: 0;
+    left: 0;
     transition: height .4s ease-in-out;
     background-color: hsla(0, 0%, 0%, .1);
     display: inline-block;
     position: absolute;
 }
-a:hover::before { height: 100%; }
+a:hover::before, nav>*:hover::before, [type="submit"]:hover::before { height: 100%; }
 
 footer {
     margin-top: 40px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     align-items: center;
     border-top: 5px solid #000000;
     text-align: center;
@@ -88,4 +97,59 @@ footer {
 }
 .discret a {
     color: hsla(0, 0%, 40%, .9);
+}
+#menu-connexion {
+float: right}
+
+input[type="text"],input[type="password"],input[type="email"] {
+    padding: 5px 10px;
+    box-shadow: 1px 1px 4px 2px hsla(0, 0%, 20%, .1) inset;
+
+}
+
+/* here is the magic */
+.boxes input[type="radio"], .boxes form {display:none;}
+.boxes input[type="radio"]:checked ~ form {display:block;}
+
+/* some eye-candy */
+
+.box form>label[for="none"] {
+    float:right;
+    display:block;
+    padding:0 20px;
+    font-size:120%;
+    line-height:40px;
+    margin-top: -40px;
+    margin-right: -10px;
+    text-transform: uppercase;
+    font-family:sans-serif;
+    cursor:pointer;
+}
+.box form>label[for="none"]:hover { background: hsla(0,0%,0%,0.1); }
+.box form {
+    position:fixed;
+    z-index: 500;
+    top:50vh;
+    left:50vw;
+    width:300px;
+    margin-left: -150px;
+    margin-top: -150px;
+    background-color:  hsla(0, 0%, 100%, .9);
+    padding: 10px;
+    padding-top: 0;
+    box-shadow: 0 0 8px 4px hsla(0, 0%, 0%, .3);
+}
+.box form>input, .box form>button {
+    display:block;
+    width: calc(100% - 20px);
+    margin:10px;
+}
+.box h3{
+    text-align:center;
+    padding:0 20px;
+    margin:0;
+    font-size:120%;
+    line-height:40px;
+    text-transform: uppercase;
+    font-family:sans-serif;
 }
