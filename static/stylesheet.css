@@ -104,8 +104,10 @@ float: right}
 input[type="text"],input[type="password"],input[type="email"] {
     padding: 5px 10px;
     box-shadow: 1px 1px 4px 2px hsla(0, 0%, 20%, .1) inset;
-
+    transition: all 300s ease-in-out;
 }
+input:focus:required:invalid { background-color: hsla(0, 100%, 60%, .1); transition: all 5s ease-in-out;}
+input:required:valid { background-color: hsla(120, 100%, 60%, .1); transition: all .4s ease-in-out; }
 
 /* here is the magic */
 .boxes input[type="radio"], .boxes form {display:none;}

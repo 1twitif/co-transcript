@@ -15,3 +15,4 @@
         <a href="https://github.com/GammaNu" target="_blank">Millicent Billette ~ 1twitif</a>
     </div>
 </footer>
+<script type="text/javascript" src="static/script.js"> </script>

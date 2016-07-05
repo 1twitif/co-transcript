@@ -7,4 +7,6 @@ $url = array_pop($uriFragments);
 $url = explode('?',$url)[0];
 if (!$url)
 	$url = 'acceuil';
+
+include './src/handler.php';
 include './pages/'.$url.'.php';
