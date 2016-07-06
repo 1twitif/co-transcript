@@ -60,6 +60,12 @@ class testAccount extends UnitTestCase {
 		$auth->setRanks($ranks);
 		$this->assertIdentical($auth->getRanks(), $ranks);
 	}
+	function testhaveRank() {
+		$auth = new Account(new mockDBConnector);
+		$ranks = ['User', 'Admin'];
+		$auth->setRanks($ranks);
+		$this->assertIdentical($auth->haveRank('Admin'), true);
+	}
 
 	function testAccountCreation() {
 		$username = 'Luc';

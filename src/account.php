@@ -10,7 +10,7 @@ class Account {
 	function __construct($dbConnector) {
 		$this->db = $dbConnector;
 	}
-	
+
 	function create($email, $username, $password) {
     	$fields = [];
     	$fields['username'] = $username;
@@ -31,6 +31,14 @@ class Account {
 
 	function setRanks($ranks){
 		$this->ranks = $ranks;
+	}
+	function haveRank($rank){
+		/*
+		if  return true;
+
+			 * si $rank fait partie de $this->ranks retourner true, sinon retourner false.
+			 */
+
 	}
 
 	function getUsername(){
