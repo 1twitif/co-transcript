@@ -1,11 +1,15 @@
 <?php
-if (isset($auth) && $auth->getUsername()) {
+if (isset($_SESSION['auth']) && $_SESSION['auth']->getUsername()) {
 	?>
 	<nav id="menu-connexion">
 		<!-- labels trigger the associated input -->
 		<a href="./"><?php
-if	($auth->getRanks();
-			echo ucfirst($auth->getUsername());
+			if($_SESSION['auth']->haveRank('admin')){
+				echo "Administrateur ";
+			} else {
+				echo "Utilisateur ";
+			}
+			echo ucfirst($_SESSION['auth']->getUsername());
 			?></a>
 		<a href="?disconnect">Déconnexion</a>
 	</nav>

@@ -33,12 +33,7 @@ class Account {
 		$this->ranks = $ranks;
 	}
 	function haveRank($rank){
-		/*
-		if  return true;
-
-			 * si $rank fait partie de $this->ranks retourner true, sinon retourner false.
-			 */
-
+		return in_array($rank, $this->ranks);
 	}
 
 	function getUsername(){

@@ -12,8 +12,8 @@
         if ($_POST['pass'] != $_POST['pass2'])
             throw new Exception "Passwords doesn't match", 400);
         //inscription effective
-        $auth = new Account(new DbConnector);
-        $auth->create($email, $username, $password);
+        $_SESSION = new Account(new DbConnector);
+        $_SESSION->create($email, $username, $password);
 
     }
 

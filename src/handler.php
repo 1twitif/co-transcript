@@ -1,11 +1,18 @@
 <?php
+include_once 'dbConnector.php';
+include_once 'account.php';
+session_start();
 if (isset($_REQUEST['email']) && $_REQUEST['identifiant'] && $_REQUEST['password']) safeRegister();
 if (isset($_REQUEST['identifiant']) && $_REQUEST['password']) safeLogin();
-global $auth;
+if (isset($_REQUEST['disconnect'])) {
+	unset($_SESSION['auth']);
+	session_destroy();
+}
+
+
 
 function safeRegister()
 {
-	global $auth;
 	// sécurisation des données utilisateur
 	$emailClean = filter_var($_REQUEST['email'], FILTER_SANITIZE_EMAIL);
 	$email = filter_var($emailClean, FILTER_VALIDATE_EMAIL);
@@ -19,14 +26,12 @@ function safeRegister()
 	 */
 
 	// chargement du gestionnaire de compte
-	include_once 'dbConnector.php';
-	include_once 'account.php';
-	$auth = new Account(new DbConnector);
-	$auth->create($email, $identifiant, $password);
+
+	$_SESSION['auth'] = new Account(new DbConnector);
+	$_SESSION['auth']->create($email, $identifiant, $password);
 }
 function safeLogin()
 {
-	global $auth;
 	// sécurisation des données utilisateur
 	$identifiantClean = filter_var($_REQUEST['identifiant'], FILTER_SANITIZE_STRING);
 	if (strlen($identifiantClean) > 20) $identifiant = '';
@@ -38,9 +43,8 @@ function safeLogin()
 	 */
 
 	// chargement du gestionnaire de compte
-	include_once 'dbConnector.php';
-	include_once 'account.php';
 
-	$auth = new Account(new DbConnector);
-	$auth->login($identifiant, $password);
+
+	$_SESSION['auth'] = new Account(new DbConnector);
+	$_SESSION['auth']->login($identifiant, $password);
 }
