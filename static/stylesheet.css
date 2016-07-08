@@ -155,3 +155,20 @@ input:required:valid { background-color: hsla(120, 100%, 60%, .1); transition: a
     text-transform: uppercase;
     font-family:sans-serif;
 }
+.photo {
+	background-color: white;
+	border-radius: 20%;
+	float: left;
+	margin-bottom: 20px;
+	margin-right: 20px;
+}
+address {
+	float: left;
+}
+address * {
+	display: block;
+	margin-top: 20px;
+}
+section, footer {
+	clear: both;
+}

@@ -2,7 +2,7 @@
     <nav>
         <a href="">A propos</a>
         <a href="">Qui sommes-nous?</a>
-        <a href="mailto:millicent.billette@gmail.com">Contact</a>
+        <a href="contact">Contact</a>
 
     </nav>
     <div id="licence" class="discret">

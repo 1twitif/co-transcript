@@ -10,7 +10,6 @@ if (isset($_REQUEST['disconnect'])) {
 }
 
 
-
 function safeRegister()
 {
 	// sécurisation des données utilisateur
@@ -24,12 +23,19 @@ function safeRegister()
 	/*
 	 * si email, l'identifiant ou le mdp est vide, ballancer une erreur.
 	 */
+	if (!$email || !$identifiant || !$password) {
+		throw new Exception('tentative de hacking ou sécurité excessive', 403);
+
+	}
 
 	// chargement du gestionnaire de compte
 
 	$_SESSION['auth'] = new Account(new DbConnector);
 	$_SESSION['auth']->create($email, $identifiant, $password);
+
+
 }
+
 function safeLogin()
 {
 	// sécurisation des données utilisateur
@@ -46,5 +52,11 @@ function safeLogin()
 
 
 	$_SESSION['auth'] = new Account(new DbConnector);
-	$_SESSION['auth']->login($identifiant, $password);
+	try {
+		$_SESSION['auth']->login($identifiant, $password);
+	} catch (Exception $e) {
+		include_once 'pages/partials/errorBox.php';
+		errorBox($e->getMessage());
+	}
+
 }

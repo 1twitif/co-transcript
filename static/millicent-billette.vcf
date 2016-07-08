@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Billette;Millicent;;;
+FN:Millicent Billette
+ORG:1twitif
+TEL;TYPE=cell:+33770772770
+ADR;TYPE=dom,home,postal:;;26 Ter, rue André Lapelleterie;Bègles;;33130;
+EMAIL;TYPE=internet,pref:millicent.billette+public@gmail.com
+PHOTO;VALUE=URL;TYPE=PNG:https://www.gravatar.com/avatar/f96d491de9bc7d7e596358eb6da4899f.png
+BDAY;VALUE=DATE:1984-11-01
+END:VCARD
