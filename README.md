@@ -1,7 +1,7 @@
 # Co-transcript
-Plateforme de conversion collaborative de contenus scannés vers du texte (transcription).
+Co-transcript est une plateforme de conversion collaborative de contenus d'un type divers vers un autre.
 
-L'outil à été conçu dans l'optique de permettre à une communauté de participer à la transcription de texte manuscrit pour les rendre accessible numériquement, indexable et facilement lisible.
+L'outil à été conçu dans l'optique de permettre à une communauté de participer à la transcription de textes manuscrits scannés pour les rendre accessibles numériquement, indexables et facilement lisibles.
 
 ## Fonctionnalité (sous forme de scénario d'utilisation) :
 
@@ -20,7 +20,7 @@ L'outil à été conçu dans l'optique de permettre à une communauté de partic
 ## Installation classique
 
 ### Pour Windows
-- Télécharger et installer [ XAMPP ] (https://www.apachefriends.org/download.html) pour Windows. 
+- Télécharger et installer [ XAMPP ] (https://www.apachefriends.org/download.html) pour Windows.
 - Télécharger et installer [Git] (https://git-scm.com/download/win) pour Windows
 - Ouvrir **Git Bash** et taper :
 ```bash

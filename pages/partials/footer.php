@@ -1,7 +1,6 @@
 <footer>
     <nav>
-        <a href="">A propos</a>
-        <a href="">Qui sommes-nous?</a>
+        <a href="about">A propos</a>
         <a href="contact">Contact</a>
 
     </nav>

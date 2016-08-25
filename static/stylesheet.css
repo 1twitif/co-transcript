@@ -8,15 +8,29 @@
     font-style: normal;
     font-family: "Arial", cursive, sans-serif;
 }
-
+p {
+	margin-bottom: 20px;
+}
 body {
 	margin: 40px;
-	padding: 40px;
+	padding: 20px;
 	background-color:  hsla(0, 0%, 80%, .8);
 	box-shadow: 0 0 50px 0 #000000;
     padding-bottom: 10px;
-}
+	display: flex;
+	flex-wrap: wrap;
 
+}
+body>header, body>footer {
+	width: 100%;
+	margin: 20px;
+}
+section {
+	flex-grow: 1;
+	flex-basis: 500px;
+	margin: 20px;
+
+}
 html {
 	background-color: #4A5957;
     background-image: url("background.jpg");
@@ -42,7 +56,6 @@ h1 {
 }
 
 h2 {
-    margin-top: 150px;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
@@ -53,16 +66,19 @@ h3 {
 	margin: 0 0 0 40px;
 }
 
-nav>*, [type="submit"]{
+nav>*, .button, [type="submit"]{
     padding: 10px;
     background-color: transparent;
     font-weight: bold;
 }
-[type="submit"]{
-    border: dotted 1px hsla(0, 0%, 40%, .9);
+.button {}
+
+.button, [type="submit"]{
+	border: dotted 1px hsla(0, 0%, 40%, .9);
+	background-color: hsla(0, 0%, 40%, .1)
 }
 
-a, nav>*, [type="submit"] {
+a, nav>*, .button, [type="submit"] {
 	color: #000000;
     text-decoration: none;
     border-bottom: dotted 1px hsla(0, 0%, 40%, .9);
@@ -70,7 +86,7 @@ a, nav>*, [type="submit"] {
     display: inline-block;
     cursor:pointer;
 }
-a::before, nav>*::before, [type="submit"]::before {
+a::before, nav>*::before, .button::before, [type="submit"]::before {
     content: "";
     width: 100%;
     height: 0;
@@ -81,7 +97,7 @@ a::before, nav>*::before, [type="submit"]::before {
     display: inline-block;
     position: absolute;
 }
-a:hover::before, nav>*:hover::before, [type="submit"]:hover::before { height: 100%; }
+a:hover::before, nav>*:hover::before, .button:hover::before, [type="submit"]:hover::before { height: 100%; }
 
 footer {
     margin-top: 40px;
