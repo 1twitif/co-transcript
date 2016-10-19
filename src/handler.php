@@ -15,21 +15,37 @@ function safeAddDocument()
 {
 // sécurisation des données ajoutées
 	$titre = filter_var($_REQUEST['titre'], FILTER_SANITIZE_STRING);
+	$fileName = preg_replace( '/[^a-z0-9\._-]+/i', '-', removeAccents($titre) ) . date("-Y-m-d_H-i-s");
 	// TODO: sécurise l'upload de fichier avec phpMussel, php-ClamAV ou autre antivirus
    // enregistrement des fichiers dans le upload
     $dossier= 'upload/';
-    $fichier = basename($_FILES['fichier']['name']);
-    if(move_uploaded_file($_FILES['fichier']['tmp_name'], $dossier . $fichier))
+    $infoFichier = pathinfo($_FILES['fichier']['name']);
+    $fileUrl = $dossier . $fileName . "." . $infoFichier['extension'];
+    if( move_uploaded_file( $_FILES['fichier']['tmp_name'], $fileUrl ) )
     {
-        echo 'Upload effectué avec succès !';
+        // ajout à la base de données
+
+        //information à l'utilisateur du bon déroulement de l'opération
+        include_once 'pages/partials/errorBox.php';
+        infoBox('Upload effectué avec succès !', 'Merci');
     }
     else
     {
-        echo 'Echec de l\'upload !';
+        include_once 'pages/partials/errorBox.php';
+        infoBox("Echec de l'upload !");
     }
 
 }
+function removeAccents($str, $charset='utf-8')
+{
+    $str = htmlentities($str, ENT_NOQUOTES, $charset);
 
+    $str = preg_replace('#&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $str);
+    $str = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $str); // pour les ligatures e.g. '&oelig;'
+    $str = preg_replace('#&[^;]+;#', '', $str); // supprime les autres caractères
+
+    return $str;
+}
 
 function safeRegister()
 {
@@ -77,7 +93,7 @@ function safeLogin()
 		$_SESSION['auth']->login($identifiant, $password);
 	} catch (Exception $e) {
 		include_once 'pages/partials/errorBox.php';
-		errorBox($e->getMessage());
+		infoBox($e->getMessage());
 	}
 
 }
