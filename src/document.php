@@ -6,6 +6,7 @@ class Document {
 	var $finished = False;
 	var $title = 0;
 	var $originalTitle = 0;
+	var $id = 0;
 
 	function addFile ($fileString) {
 		$this->files[] = $fileString;

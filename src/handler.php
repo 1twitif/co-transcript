@@ -24,7 +24,7 @@ function safeAddDocument()
     if( move_uploaded_file( $_FILES['fichier']['tmp_name'], $fileUrl ) )
     {
         // ajout à la base de données
-
+        // TODO: mettre à jour l'objet document pour qu'il prenne en charge la persistance
         //information à l'utilisateur du bon déroulement de l'opération
         include_once 'pages/partials/errorBox.php';
         infoBox('Upload effectué avec succès !', 'Merci');
